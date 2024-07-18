@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="coffee">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo Htmx</title>
     <script
       src="https://unpkg.com/htmx.org@1.9.5"
       type="text/javascript"
@@ -16,12 +13,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="container max-w-xl mx-auto">
-    <h1 class="font-bold text-2xl my-16">HTMX TODO!</h1>
-    {{if .Info}}
-    <p>{{.Info}}</p>
-    {{else}}
-    <p></p>
-    {{end}}
+    <h1 class="font-bold text-2xl my-16">HTMx TODO!</h1>
+
     <form class="grid grid-cols-7 m-4 gap-2">
       <input class="col-span-5 input input-bordered" type="text" name="todo" />
       <button
@@ -33,17 +26,18 @@
         Create Todo
       </button>
     </form>
+
     <div id="todos" class="my-8">
-      {{block "todos".}} {{range .Todos}}
+      {{ block "Todos" . }} {{ range . }}
       <div class="grid grid-cols-7 gap-2 mt-4">
-        <p class="col-span-5 {{if .Done}} line-through {{end}}">{{.Todo}}</p>
+        <p class="col-span-5 {{if .Done }} line-through {{end}}">{{.Todo}}</p>
         <button
           class="btn btn-success"
           hx-put="/todo/{{.Id}}"
           hx-target="#todos"
           hx-swap="innerHTML"
         >
-          &#1003;
+          &#10003;
         </button>
         <button
           class="btn btn-error"
@@ -54,7 +48,7 @@
           &#x2717;
         </button>
       </div>
-      {{end}} {{end}}
+      {{ end }} {{ end }}
     </div>
   </body>
 </html>
